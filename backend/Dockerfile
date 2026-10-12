@@ -30,5 +30,6 @@ ENTRYPOINT ["npm", "run", "dev:server"]
 FROM build-stage as production-stage
 ENV NODE_ENV=production
 COPY docker-entrypoint.sh .
-RUN chmod +x docker-entrypoint.sh
+RUN chmod +x docker-entrypoint.sh && chown -R 1000:1000 /app
+USER 1000
 ENTRYPOINT ["./docker-entrypoint.sh"]
